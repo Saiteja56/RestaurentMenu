@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resaurent menu</title>
+    <link rel="stylesheet" href="styling.css">
+</head>
+<body>
+    <h3>
+        MENU ITEMS
+    </h3>
+<div class="button-container">
+    <button id="button1">Burger</button>
+  <button id="button2">Pizza</button>
+  <button id="button3">Salad</button>
+</div >
+<div class="button-container">
+  <button id="button4">Steak</button>
+  <button id="button5">Pasta</button>
+  <button id="button6">Sushi</button>
+</div>
+<div class="button-container">
+  <button id="button7">Sandwich</button>
+  <button id="button8">Soup</button>
+  <button id="button9">Dessert</button>
+</div>
+
+<button id="finishButton">Finish</button>
+
+<script>
+ var buttons = [
+  { id: "button1", name: "Burger", price: 150 },
+  { id: "button2", name: "Pizza", price: 200 },
+  { id: "button3", name: "Salad", price: 100 },
+  { id: "button4", name: "Steak", price: 250 },
+  { id: "button5", name: "Pasta", price: 180 },
+  { id: "button6", name: "Sushi", price: 220 },
+  { id: "button7", name: "Sandwich", price: 120 },
+  { id: "button8", name: "Soup", price: 80 },
+  { id: "button9", name: "Dessert", price: 90 }
+];
+
+var selectedItems = [];
+
+// Function to calculate the total bill
+function calculateTotalBill() {
+  var totalBill = 0;
+  selectedItems.forEach(function(item) {
+    totalBill += item.price;
+  });
+  return totalBill;
+}
+
+// Add event listeners to the buttons
+buttons.forEach(function(button) {
+  var btn = document.getElementById(button.id);
+  btn.addEventListener("click", function() {
+    // Call your function or perform the desired action
+    var confirmation = confirm("The price of " + btn.innerHTML + " is " + button.price + " rupees. Do you want to select this?");
+    
+    
+    
+  
+    if (confirmation) {
+      btn.classList.toggle("button-selected");
+
+      var index = selectedItems.findIndex(function(item) {
+      return item.id === button.id;
+    });
+    
+      if (index > -1) {
+      selectedItems.splice(index, 1);
+    } else {
+      selectedItems.push(button);
+    }
+    
+    
+    console.log("User selected: " + button.name);
+    
+    // Perform additional actions if the user confirms
+    
+    
+    // You can add your custom logic here, such as updating a shopping cart or redirecting to another page.
+  }
+});
+    // Add your custom logic here
+});
+
+var finishButton = document.getElementById("finishButton");
+finishButton.addEventListener("click", function() {
+  var totalBill = calculateTotalBill();
+  alert("Total Bill: " + totalBill + " rupees");
+});
+
+</script>
+    
+</body>
+</html>
